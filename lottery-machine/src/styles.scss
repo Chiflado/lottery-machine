@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f2f2f2;
+}
+
+.result-card {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: black;
+    border-radius: 8px;
+
+}
+
+.playing-history-card {
+    padding: 10px;
+    background-color: #A5C9D8;
+    border-radius: 8px;
+}
+
+.winning-numbers-wrapper {
+    display: flex
+}
+
+.winning-numbers-label {
+    margin-right: 12px;
+}
+
+.winning-numbers {
+    display: flex;
+}
+
+.number-field {
+    height: 24px;
+    width: 24px;
+    border: 1px blue solid;
+    box-shadow: black;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-field + .number-field {
+    margin-left: 8px;
+}

@@ -1,1 +1,26 @@
-<p>main works!</p>
+<div class="result-card">
+    <h2 class="card-header">Result</h2>
+    <div class="playing-history-card"></div>
+    <div class="result-history-card"></div>
+    <div class="winning-numbers-wrapper">
+        <div class="winning-numbers-label">Winning numbers:</div>
+        <div class="winning-numbers">
+            <div class="number-field">
+                <div *ngIf="winningNumbers[0]">{{winningNumbers[0]}}</div>
+            </div>
+            <div class="number-field">
+                <div *ngIf="winningNumbers[1]">{{winningNumbers[1]}}</div>
+            </div>
+            <div class="number-field">
+                <div *ngIf="winningNumbers[2]">{{winningNumbers[2]}}</div>
+            </div>
+            <div class="number-field">
+                <div *ngIf="winningNumbers[3]">{{winningNumbers[3]}}</div>
+            </div>
+            <div class="number-field">
+                <div *ngIf="winningNumbers[4]">{{winningNumbers[4]}}</div>
+            </div>
+        </div>
+    </div>
+    <button mat-button (click)="start()">Let's go!</button>
+</div>
