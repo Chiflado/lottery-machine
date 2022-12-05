@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HistoryService } from '../history.service';
 
 @Component({
   selector: 'app-main',
@@ -21,7 +22,7 @@ export class MainComponent implements OnInit {
     fifthNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)])
   });
   
-  constructor() {}
+  constructor(public historyService: HistoryService) {}
   
   ngOnInit(): void {
     
@@ -29,6 +30,9 @@ export class MainComponent implements OnInit {
 
   start(): void {
     this.resetNumbers();
+    this.historyService.numberOfTickets++;
+    this.historyService.buyNewTicket();
+    this.historyService.addWeek();
     for (let i = 0; i < 5; i++) {
       const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
       this.winningNumbers.push(this.numberPool[numberIndex]);
@@ -54,6 +58,9 @@ export class MainComponent implements OnInit {
     this.winningNumbers = [];
     this.numberPool = [];
     this.matchedNumbers = 0;
+    Array.from(document.getElementsByClassName('matched-number')).forEach(element => {
+      element.classList.remove('matched-number');
+    });
     for (let i = 1; i < 91; i++) {
       this.numberPool.push(i);
     }
@@ -76,10 +83,17 @@ export class MainComponent implements OnInit {
       if (this.winningNumbers.includes(this.userNumbersForm.get(key)?.value)) {
         document.getElementById(key)?.classList.add('matched-number');
         this.matchedNumbers++;
-        console.log(document.getElementById(key));
-        console.log(this.matchedNumbers);
       }
     });
+    if (this.matchedNumbers === 2) {
+      this.historyService.twoMatches++;
+    } else if (this.matchedNumbers === 3) {
+      this.historyService.threeMatches++;
+    } else if (this.matchedNumbers === 4) {
+      this.historyService.fourMatches++;
+    } else if (this.matchedNumbers === 5) {
+      this.historyService.fiveMatches++;
+    }
   }
   
 }

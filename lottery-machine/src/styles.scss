@@ -20,7 +20,7 @@ input[type=number] {
     box-shadow: black;
     border-radius: 8px;
     background-color: white;
-    width: 50%;
+    width: 30%;
 }
 
 .playing-history-card {
@@ -28,6 +28,12 @@ input[type=number] {
     background-color: #A5C9D8;
     border-radius: 8px;
     margin-bottom: 10px;
+    width: 50%;
+    color: white;
+}
+
+.history-label {
+    width: 50%;
 }
 
 .winning-numbers-wrapper {
@@ -72,4 +78,8 @@ input[type=number] {
 
 .matched-number {
     border-color: green;
+}
+
+.history-element {
+    display: flex;
 }
