@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
   numberPool: number[] = [];
   winningNumbers: number[] = [];
   userNumbers: number[] = [];
+  matchedNumbers = 0;
 
   userNumbersForm = new FormGroup({
     firstNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
@@ -34,6 +35,7 @@ export class MainComponent implements OnInit {
       this.numberPool.splice(numberIndex, 1);
     }
     this.winningNumbers.sort();
+    this.checksMatches()
     console.log(this.winningNumbers, this.numberPool);
   } 
 
@@ -51,6 +53,7 @@ export class MainComponent implements OnInit {
   resetNumbers(): void {
     this.winningNumbers = [];
     this.numberPool = [];
+    this.matchedNumbers = 0;
     for (let i = 1; i < 91; i++) {
       this.numberPool.push(i);
     }
@@ -67,4 +70,16 @@ export class MainComponent implements OnInit {
       console.log(this.userNumbers);
     });
   }
+
+  checksMatches(): void {
+    Object.keys(this.userNumbersForm.controls).forEach(key => {
+      if (this.winningNumbers.includes(this.userNumbersForm.get(key)?.value)) {
+        document.getElementById(key)?.classList.add('matched-number');
+        this.matchedNumbers++;
+        console.log(document.getElementById(key));
+        console.log(this.matchedNumbers);
+      }
+    });
+  }
+  
 }
