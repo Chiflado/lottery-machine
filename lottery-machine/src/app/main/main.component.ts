@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   start(): void {
     this.resetNumbers();
     for (let i = 0; i < 5; i++) {
-      const numberIndex = this.getRandomInt(0, this.numberPool.length);
+      const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
       this.winningNumbers.push(this.numberPool[numberIndex]);
       this.numberPool.splice(numberIndex, 1);
     }
@@ -39,6 +39,7 @@ export class MainComponent implements OnInit {
 
   resetNumbers(): void {
     this.winningNumbers = [];
+    this.numberPool = [];
     for (let i = 1; i < 91; i++) {
       this.numberPool.push(i);
     }
