@@ -33,6 +33,7 @@ export class MainComponent implements OnInit {
       this.winningNumbers.push(this.numberPool[numberIndex]);
       this.numberPool.splice(numberIndex, 1);
     }
+    this.winningNumbers.sort();
     console.log(this.winningNumbers, this.numberPool);
   } 
 
