@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-main',
@@ -9,6 +10,14 @@ export class MainComponent implements OnInit {
 
   numberPool: number[] = [];
   winningNumbers: number[] = [];
+
+  userNumbersForm = new FormGroup({
+    firstNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    secondNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    thirdNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    fourthNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    fifthNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)])
+  });
   
   constructor() {}
   
@@ -44,5 +53,9 @@ export class MainComponent implements OnInit {
       this.numberPool.push(i);
     }
     console.log(this.numberPool);
+  }
+
+  addUserNumber(formControl: FormControl): void {
+    console.log(formControl);
   }
 }

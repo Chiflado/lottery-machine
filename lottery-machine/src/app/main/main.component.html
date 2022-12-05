@@ -22,5 +22,35 @@
             </div>
         </div>
     </div>
-    <button mat-button (click)="start()">Let's go!</button>
+    <div class="winning-numbers-wrapper">
+        <div class="winning-numbers-label">Your numbers:</div>
+        <form [formGroup]="userNumbersForm" class="winning-numbers">
+            <input
+                required
+                formControlName="firstNumber"
+                type="number"
+                class="number-field input-number-field">
+            <input
+                required
+                formControlName="secondNumber"
+                type="number"
+                class="number-field input-number-field">
+            <input
+                required
+                formControlName="thirdNumber"
+                type="number"
+                class="number-field input-number-field">
+            <input
+                required
+                formControlName="fourthNumber"
+                type="number"
+                class="number-field input-number-field">
+            <input
+                required
+                formControlName="fifthNumber"
+                type="number"
+                class="number-field input-number-field">
+        </form >
+    </div>
+    <button mat-button (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
 </div>
