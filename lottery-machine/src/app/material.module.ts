@@ -8,10 +8,11 @@ import { MatButtonModule } from '@angular/material/button'
   declarations: [],
   imports: [
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MaterialModule
   ],
   exports: [
-
+    MatButtonModule
   ]
 })
 export class MaterialModule { }
