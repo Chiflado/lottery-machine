@@ -14,7 +14,24 @@
             <div class="cost">{{historyService.cost}}</div>
         </div>
     </div>
-    <div class="result-history-card"></div>
+    <div class="result-history-card">
+        <div class="two-matches matches-card">
+            <div class="matches-history">2 matches</div>
+            <div class="matches-amount">{{historyService.twoMatches}}</div>
+        </div>
+        <div class="three-matches matches-card">
+            <div class="matches-history">3 matches</div>
+            <div class="matches-amount">{{historyService.threeMatches}}</div>
+        </div>
+        <div class="four-matches matches-card">
+            <div class="matches-history">4 matches</div>
+            <div class="matches-amount">{{historyService.fourMatches}}</div>
+        </div>
+        <div class="five-matches matches-card">
+            <div class="matches-history">5 matches</div>
+            <div class="matches-amount">{{historyService.fiveMatches}}</div>
+        </div>
+    </div>
     <div class="winning-numbers-wrapper">
         <div class="winning-numbers-label">Winning numbers:</div>
         <div class="winning-numbers">
@@ -39,41 +56,39 @@
         <div class="winning-numbers-label">Your numbers:</div>
         <form [formGroup]="userNumbersForm" class="winning-numbers">
             <input
-                required
                 formControlName="firstNumber"
                 type="number"
                 id="firstNumber"
                 class="number-field input-number-field"
                 (ngModelChange)="addUserNumber('firstNumber')">
             <input
-                required
                 formControlName="secondNumber"
                 type="number"
                 id="secondNumber"
                 class="number-field input-number-field"
                 (ngModelChange)="addUserNumber('secondNumber')">
             <input
-                required
                 formControlName="thirdNumber"
                 type="number"
-                id=""
+                id="thirdNumber"
                 class="number-field input-number-field"
                 (ngModelChange)="addUserNumber('thirdNumber')">
             <input
-                required
                 formControlName="fourthNumber"
                 type="number"
-                id=""
+                id="fourthNumber"
                 class="number-field input-number-field"
                 (ngModelChange)="addUserNumber('fourthNumber')">
             <input
-                required
                 formControlName="fifthNumber"
                 type="number"
-                id=""
+                id="fifthNumber"
                 class="number-field input-number-field"
                 (ngModelChange)="addUserNumber('fifthNumber')">
         </form >
     </div>
-    <button mat-button (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
+    <div class="button-wrapper">
+        <button mat-button class="action-button" (click)="randomize()">Give me random numbers</button>
+        <button mat-button class="action-button" (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
+    </div>
 </div>
