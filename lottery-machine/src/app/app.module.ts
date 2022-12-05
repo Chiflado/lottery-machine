@@ -6,6 +6,7 @@ import { MainComponent } from './main/main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HistoryService } from './history.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,

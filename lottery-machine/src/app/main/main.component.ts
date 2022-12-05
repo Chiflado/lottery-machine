@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { HistoryService } from '../history.service';
 
 @Component({
@@ -15,12 +15,12 @@ export class MainComponent implements OnInit {
   matchedNumbers = 0;
   isRandom = false;
 
-  userNumbersForm = new FormGroup({
-    firstNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
-    secondNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
-    thirdNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
-    fourthNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
-    fifthNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)])
+  userNumbersForm = new UntypedFormGroup({
+    firstNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    secondNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    thirdNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    fourthNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
+    fifthNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)])
   });
   
   constructor(public historyService: HistoryService) {}
