@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   winningNumbers: number[] = [];
   userNumbers: number[] = [];
   matchedNumbers = 0;
+  isRandom = false;
 
   userNumbersForm = new FormGroup({
     firstNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
@@ -33,14 +34,8 @@ export class MainComponent implements OnInit {
     this.historyService.numberOfTickets++;
     this.historyService.buyNewTicket();
     this.historyService.addWeek();
-    for (let i = 0; i < 5; i++) {
-      const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
-      this.winningNumbers.push(this.numberPool[numberIndex]);
-      this.numberPool.splice(numberIndex, 1);
-    }
-    this.winningNumbers.sort();
+    this.winningNumbers = this.getFiveNumbers();
     this.checksMatches()
-    console.log(this.winningNumbers, this.numberPool);
   } 
 
   getRandomInt(min: number, max: number): number {       
@@ -55,6 +50,7 @@ export class MainComponent implements OnInit {
   }
 
   resetNumbers(): void {
+    this.isRandom = false;
     this.winningNumbers = [];
     this.numberPool = [];
     this.matchedNumbers = 0;
@@ -64,18 +60,41 @@ export class MainComponent implements OnInit {
     for (let i = 1; i < 91; i++) {
       this.numberPool.push(i);
     }
-    console.log(this.numberPool);
+  }
+
+  getFiveNumbers(): number[] {
+    let randomNUmbers = [];
+    for (let i = 0; i < 5; i++) {
+      const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
+      randomNUmbers.push(this.numberPool[numberIndex]);
+      this.numberPool.splice(numberIndex, 1);
+    }
+    randomNUmbers = randomNUmbers.sort(function(a, b) {return a-b});
+    return randomNUmbers;
+  }
+
+  randomize(): void {
+    this.resetNumbers();
+    this.isRandom = true;
+    this.userNumbers = this.getFiveNumbers();
+    let counter = 0;
+    Object.keys(this.userNumbersForm.controls).forEach(key => {
+      this.userNumbersForm.get(key)?.setValue(this.userNumbers[counter]);
+      counter++;
+    });
   }
 
   addUserNumber(formControlName: string): void {
-    if (this.userNumbers.includes(this.userNumbersForm.get(formControlName)?.value)) {
-      this.userNumbersForm.get(formControlName)?.setErrors({'incorrect': true});
+    if (!this.isRandom) {
+      this.resetNumbers();
+      if (this.userNumbers.includes(this.userNumbersForm.get(formControlName)?.value)) {
+        this.userNumbersForm.get(formControlName)?.setErrors({'incorrect': true});
+      }
+      this.userNumbers = [];
+      Object.keys(this.userNumbersForm.controls).forEach(key => {
+        this.userNumbers.push(this.userNumbersForm.get(key)?.value);
+      });
     }
-    this.userNumbers = [];
-    Object.keys(this.userNumbersForm.controls).forEach(key => {
-      this.userNumbers.push(this.userNumbersForm.get(key)?.value);
-      console.log(this.userNumbers);
-    });
   }
 
   checksMatches(): void {
