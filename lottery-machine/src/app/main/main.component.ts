@@ -10,6 +10,7 @@ export class MainComponent implements OnInit {
 
   numberPool: number[] = [];
   winningNumbers: number[] = [];
+  userNumbers: number[] = [];
 
   userNumbersForm = new FormGroup({
     firstNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
@@ -55,7 +56,14 @@ export class MainComponent implements OnInit {
     console.log(this.numberPool);
   }
 
-  addUserNumber(formControl: FormControl): void {
-    console.log(formControl);
+  addUserNumber(formControlName: string): void {
+    if (this.userNumbers.includes(this.userNumbersForm.get(formControlName)?.value)) {
+      this.userNumbersForm.get(formControlName)?.setErrors({'incorrect': true});
+    }
+    this.userNumbers = [];
+    Object.keys(this.userNumbersForm.controls).forEach(key => {
+      this.userNumbers.push(this.userNumbersForm.get(key)?.value);
+      console.log(this.userNumbers);
+    });
   }
 }

@@ -29,27 +29,32 @@
                 required
                 formControlName="firstNumber"
                 type="number"
-                class="number-field input-number-field">
+                class="number-field input-number-field"
+                (ngModelChange)="addUserNumber('firstNumber')">
             <input
                 required
                 formControlName="secondNumber"
                 type="number"
-                class="number-field input-number-field">
+                class="number-field input-number-field"
+                (ngModelChange)="addUserNumber('secondNumber')">
             <input
                 required
                 formControlName="thirdNumber"
                 type="number"
-                class="number-field input-number-field">
+                class="number-field input-number-field"
+                (ngModelChange)="addUserNumber('thirdNumber')">
             <input
                 required
                 formControlName="fourthNumber"
                 type="number"
-                class="number-field input-number-field">
+                class="number-field input-number-field"
+                (ngModelChange)="addUserNumber('fourthNumber')">
             <input
                 required
                 formControlName="fifthNumber"
                 type="number"
-                class="number-field input-number-field">
+                class="number-field input-number-field"
+                (ngModelChange)="addUserNumber('fifthNumber')">
         </form >
     </div>
     <button mat-button (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
