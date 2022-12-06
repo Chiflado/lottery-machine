@@ -1,5 +1,5 @@
-<div class="result-card">
-    <h2 class="card-header">Result</h2>
+<mat-card class="result-card">
+    <mat-card-title class="card-header">Result</mat-card-title>
     <div class="playing-history-card">
         <div class="ticket-amount history-element">
             <div class="amount-label history-label">Number of Tickets:</div>
@@ -11,7 +11,7 @@
         </div>
         <div class="cost-wrapper history-element">
             <div class="cost-label history-label">Cost of tickets:</div>
-            <div class="cost">{{historyService.cost}}</div>
+            <div class="cost">{{historyService.cost}} Ft</div>
         </div>
     </div>
     <div class="result-history-card">
@@ -87,8 +87,18 @@
                 (ngModelChange)="addUserNumber('fifthNumber')">
         </form >
     </div>
+    <div class="slider-wrapper">
+        <mat-slider
+            discrete
+            min="1"
+            max="1000"
+            step="1"
+            value="1">
+            <input matSliderThumb [(ngModel)]="speed">
+        </mat-slider>
+    </div>
     <div class="button-wrapper">
         <button mat-raised-button color="primary" class="action-button" (click)="randomize()">Give me random numbers</button>
         <button mat-raised-button color="primary" class="action-button" (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
     </div>
-</div>
+</mat-card>

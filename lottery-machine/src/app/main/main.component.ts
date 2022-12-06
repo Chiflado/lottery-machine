@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
   userNumbers: number[] = [];
   matchedNumbers = 0;
   isRandom = false;
+  speed = 1;
 
   userNumbersForm = new UntypedFormGroup({
     firstNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
@@ -34,14 +35,23 @@ export class MainComponent implements OnInit {
     this.historyService.numberOfTickets++;
     this.historyService.buyNewTicket();
     this.historyService.addWeek();
-    this.winningNumbers = this.getFiveNumbers();
-    this.checksMatches()
+    let counter = 0;
+    let interval = setInterval(() => {
+      const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
+      this.winningNumbers.push(this.numberPool[numberIndex]);
+      this.numberPool.splice(numberIndex, 1);
+      counter++;
+      if (counter === 5) {
+        this.winningNumbers = this.winningNumbers.sort(function(a, b) {return a-b});
+        this.checksMatches()
+        clearInterval(interval);
+      }
+    }, this.speed);
   } 
 
   getRandomInt(min: number, max: number): number {       
     var byteArray = new Uint8Array(1);
     window.crypto.getRandomValues(byteArray);
-
     var range = max - min + 1;
     var max_range = 256;
     if (byteArray[0] >= Math.floor(max_range / range) * range)
