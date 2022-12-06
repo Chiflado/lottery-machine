@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { HistoryService } from '../history.service';
 
@@ -7,7 +7,7 @@ import { HistoryService } from '../history.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   numberPool: number[] = [];
   winningNumbers: number[] = [];
@@ -24,17 +24,11 @@ export class MainComponent implements OnInit {
     fifthNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)])
   });
   
-  constructor(public historyService: HistoryService) {}
+  constructor(private historyService: HistoryService) {}
   
-  ngOnInit(): void {
-    
-  }
-
   start(): void {
     this.resetNumbers();
-    this.historyService.numberOfTickets++;
     this.historyService.buyNewTicket();
-    this.historyService.addWeek();
     let counter = 0;
     let interval = setInterval(() => {
       const numberIndex = this.getRandomInt(0, this.numberPool.length -1);
@@ -114,14 +108,8 @@ export class MainComponent implements OnInit {
         this.matchedNumbers++;
       }
     });
-    if (this.matchedNumbers === 2) {
-      this.historyService.twoMatches++;
-    } else if (this.matchedNumbers === 3) {
-      this.historyService.threeMatches++;
-    } else if (this.matchedNumbers === 4) {
-      this.historyService.fourMatches++;
-    } else if (this.matchedNumbers === 5) {
-      this.historyService.fiveMatches++;
+    if (this.matchedNumbers > 1) {
+      this.historyService.gotMatches(this.matchedNumbers);
     }
   }
   
