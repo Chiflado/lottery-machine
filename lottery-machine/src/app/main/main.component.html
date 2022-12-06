@@ -70,6 +70,6 @@
     </div>
     <div class="button-wrapper">
         <button mat-raised-button color="primary" class="action-button" (click)="randomize()">Give me random numbers</button>
-        <button mat-raised-button color="primary" class="action-button" (click)="start()" [disabled]="!userNumbersForm.valid">Let's go!</button>
+        <button mat-raised-button color="primary" class="action-button" (click)="start()" [disabled]="!userNumbersForm.valid || lotteryRunning">Let's go!</button>
     </div>
 </mat-card>

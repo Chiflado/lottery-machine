@@ -16,6 +16,8 @@ export class MainComponent {
   isRandom = false;
   speed = 1;
 
+  lotteryRunning = false;
+
   userNumbersForm = new UntypedFormGroup({
     firstNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
     secondNumber: new UntypedFormControl('', [Validators.required, Validators.min(1), Validators.max(90)]),
@@ -27,6 +29,7 @@ export class MainComponent {
   constructor(private historyService: HistoryService) {}
   
   start(): void {
+    this.lotteryRunning = true;
     this.resetNumbers();
     this.historyService.buyNewTicket();
     let counter = 0;
@@ -39,6 +42,7 @@ export class MainComponent {
         this.winningNumbers = this.winningNumbers.sort(function(a, b) {return a-b});
         this.checksMatches()
         clearInterval(interval);
+        this.lotteryRunning = false;
       }
     }, this.speed);
   } 
