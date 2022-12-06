@@ -1,37 +1,7 @@
 <mat-card class="result-card">
     <mat-card-title class="card-header">Result</mat-card-title>
-    <div class="playing-history-card">
-        <div class="ticket-amount history-element">
-            <div class="amount-label history-label">Number of Tickets:</div>
-            <div class="amount">{{historyService.numberOfTickets}}</div>
-        </div>
-        <div class="years-spent-wrapper history-element">
-            <div class="years-label history-label">Years spent:</div>
-            <div class="years">{{historyService.years}}</div>
-        </div>
-        <div class="cost-wrapper history-element">
-            <div class="cost-label history-label">Cost of tickets:</div>
-            <div class="cost">{{historyService.cost}} Ft</div>
-        </div>
-    </div>
-    <div class="result-history-card">
-        <div class="two-matches matches-card">
-            <div class="matches-history">2 matches</div>
-            <div class="matches-amount">{{historyService.twoMatches}}</div>
-        </div>
-        <div class="three-matches matches-card">
-            <div class="matches-history">3 matches</div>
-            <div class="matches-amount">{{historyService.threeMatches}}</div>
-        </div>
-        <div class="four-matches matches-card">
-            <div class="matches-history">4 matches</div>
-            <div class="matches-amount">{{historyService.fourMatches}}</div>
-        </div>
-        <div class="five-matches matches-card">
-            <div class="matches-history">5 matches</div>
-            <div class="matches-amount">{{historyService.fiveMatches}}</div>
-        </div>
-    </div>
+    <app-playing-history></app-playing-history>
+    <app-result-history></app-result-history>
     <div class="winning-numbers-wrapper">
         <div class="winning-numbers-label">Winning numbers:</div>
         <div class="winning-numbers">
